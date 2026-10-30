@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ART | Sysadmin & Developer</title>
+    <meta name="description" content="Персональный сайт A.R.T (CROFT). Системный администратор, программист и студент. Топовые проекты и база знаний 1С.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230055ff'/%3E%3C/svg%3E">
+    <style>
+        /* --- БАЗОВЫЕ НАСТРОЙКИ И ЦВЕТА (В стиле ART) --- */
+        :root {
+            --bg: #050505;
+            --panel: #111111;
+            --line: #222222;
+            --text: #ffffff;
+            --muted: #888888;
+            --blue: #0033ff; /* Твой фирменный синий */
+            --blue-glow: rgba(0, 51, 255, 0.5);
+            --mono: ui-monospace, "Cascadia Code", "JetBrains Mono", monospace;
+            --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Фоновая сетка как на твоем сайте */
+            background-image:
+                    radial-gradient(circle at 50% 0%, rgba(0, 51, 255, 0.15) 0%, transparent 50%),
+                    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- ШАПКА (HEADER) --- */
+        header {
+            padding: 80px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px var(--blue-glow));
+        }
+
+        h1 {
+            font-family: var(--mono);
+            font-size: 3rem;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: var(--mono);
+            color: var(--blue);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .bio {
+            max-width: 600px;
+            color: var(--muted);
+            margin-bottom: 30px;
+        }
+
+        /* Кнопка */
+        .btn {
+            display: inline-block;
+            background: var(--blue);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-family: var(--mono);
+            font-weight: bold;
+            border-radius: 6px;
+            transition: 0.3s;
+            box-shadow: 0 0 20px var(--blue-glow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px var(--blue);
+        }
+
+        /* --- СЕКЦИИ --- */
+        section {
+            padding: 60px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .section-title {
+            font-family: var(--mono);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            background: var(--blue);
+            border-radius: 50%;
+        }
+
+        /* --- СЕТКА КАРТОЧЕК ПРОЕКТОВ --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 25px;
+            text-decoration: none;
+            color: var(--text);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            border-color: var(--blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px var(--blue-glow);
+        }
+
+        .project-card h3 {
+            font-family: var(--mono);
+            color: var(--blue);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .project-card p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+
+        /* --- КАРТИНКА 1СBASE (ТВОЙ БАННЕР) --- */
+        .hero-banner {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--line);
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .hero-banner:hover {
+            border-color: var(--blue);
+            box-shadow: 0 0 30px rgba(0, 51, 255, 0.2);
+        }
+
+        /* --- ПОДВАЛ --- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--line);
+            font-family: var(--mono);
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-logo {
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- ШАПКА -->
+    <header>
+        <!-- Логотип ART с точкой (можно использовать твою картинку лого) -->
+        <svg class="logo-img" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 70 L45 30 L60 70" stroke="white" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+            <path d="M45 30 H60 C70 30 75 40 70 50 L60 70" stroke="white" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+            <path d="M75 30 H95 M85 30 V70" stroke="white" stroke-width="8" stroke-linecap="square"/>
+            <circle cx="20" cy="70" r="8" fill="#0033ff" />
+        </svg>
+
+        <h1>ART</h1>
+        <div class="subtitle">SYSADMIN / PROGRAMMER</div>
+
+        <p class="bio">
+            Привет, я A.R.T (Croft). Системный администратор, программист и студент.
+            Люблю разбираться в том, как всё работает — от микросхем до кода.
+            Создаю полезные инструменты и базы знаний.
+        </p>
+
+        <a href="https://github.com/OBLADAET-ru" target="_blank" class="btn">МОЙ GITHUB</a>
+    </header>
+
+    <!-- СЕКЦИЯ: ГЛАВНЫЙ ПРОЕКТ (1CBASE) -->
+    <section>
+        <div class="section-title">Главный проект</div>
+        <a href="https://github.com/OBLADAET-ru/1Cbase" target="_blank">
+            <!-- Сюда вставляем твою третью картинку (баннер 1Сbase) -->
+            <img src="1cbase-banner.jpg" alt="1Cbase Banner" class="hero-banner">
+        </a>
+        <p style="color: var(--muted); text-align: center; font-family: var(--mono);">
+            Открытая база знаний для разработчиков 1С:Предприятие 8.3+
+        </p>
+    </section>
+
+    <!-- СЕКЦИЯ: ТОП ПРОЕКТЫ -->
+    <!-- СЕКЦИЯ: ГЛАВНЫЙ ПРОЕКТ (STUDENT.BASE) -->
+    <section>
+        <div class="section-title">STUDENT.BASE</div>
+
+        <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; text-align: center; transition: 0.3s;" onmouseover="this.style.borderColor='var(--blue)'" onmouseout="this.style.borderColor='var(--line)'">
+
+            <a href="https://github.com/OBLADAET-ru/student-base" target="_blank" style="display: block; margin-bottom: 20px;">
+                <!-- Обложка проекта STUDENT.BASE (файл hero.jpg из репозитория) -->
+                <img src="hero.jpg" alt="STUDENT.BASE Project" style="width: 100%; max-width: 600px; border-radius: 12px; display: block; margin: 0 auto; object-fit: cover; border: 1px solid var(--line);">
+            </a>
+
+            <p style="color: var(--muted); font-family: var(--mono); font-size: 0.95rem; margin-bottom: 20px;">
+                Единый справочник по всем предметам, темам и курсам.<br>
+                <span style="font-size: 0.8rem; color: var(--dim);">Конспекты лекций, схемы, вопросы к экзаменам и примеры задач.</span>
+            </p>
+
+            <a href="https://github.com/OBLADAET-ru/student-base" target="_blank" class="btn" style="font-size: 0.9rem; padding: 8px 16px;">
+                Перейти в репозиторий
+            </a>
+
+        </div>
+    </section>
+
+            <!-- Проект 2 -->
+            <a href="https://github.com/OBLADAET-ru/gitignore-gen" class="project-card" target="_blank">
+                <h3>gitignore-gen</h3>
+                <p>CLI-утилита на TypeScript, которая сканирует директорию и автоматически генерирует .gitignore по стеку проекта.</p>
+            </a>
+
+            <!-- Проект 3 -->
+            <a href="https://github.com/OBLADAET-ru/WebCoding_Base" class="project-card" target="_blank">
+                <h3>WebCoding_Base</h3>
+                <p>База наработок и практик по веб-разработке. Фундаментальные знания для кодинга.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        <div class="footer-logo">
+            <span style="color: #0033ff;">•</span> CROFT
+        </div>
+        <p style="margin-top: 10px;">&copy; Работаем с 2021 A.R.T. Все права защищены.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
